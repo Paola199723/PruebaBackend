@@ -1,0 +1,13 @@
+package com.medisalud.MediSaludApplication;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class MediSaludApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
