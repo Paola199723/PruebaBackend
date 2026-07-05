@@ -38,6 +38,7 @@ public class PacienteController {
 	public PacienteController(CrearPacienteService crearService, ListarPacienteService listarService, BuscarPacienteService buscarService, ActualizarPacienteService actualizarService, EliminarPacienteService eliminarService) {
 		this.crearService = crearService;
 		this.listarService = listarService;
+		
 		this.buscarService = buscarService;
 		this.actualizarService = actualizarService;
 		this.eliminarService = eliminarService;

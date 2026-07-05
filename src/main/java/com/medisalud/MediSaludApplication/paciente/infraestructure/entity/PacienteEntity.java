@@ -22,13 +22,13 @@ public class PacienteEntity {
     @Column(name = "full_name", nullable = false, length = 100)
     private String fullName;
 
-    @Column(name = "Documento", nullable = false, length = 100)
+    @Column(name = "Documento", nullable = false, unique = true, length = 100)
     private String documento;
 
-    @Column(name = "phone", length = 20)
+    @Column(name = "phone", nullable = false, length = 20)
     private String phone;
 
-    @Column(name = "email", length = 20)
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
     public PacienteEntity() {
     }

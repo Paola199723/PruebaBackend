@@ -10,17 +10,19 @@ import com.medisalud.MediSaludApplication.paciente.infraestructure.repository.Jp
 @Service
 public class CrearPacienteService {
 
-	private final JpaPacienteRepository repository;
-	private final PacienteMapper mapper;
+    private final JpaPacienteRepository repository;
+    private final PacienteMapper mapper;
 
-	public CrearPacienteService(JpaPacienteRepository repository, PacienteMapper mapper) {
-		this.repository = repository;
-		this.mapper = mapper;
-	}
+    public CrearPacienteService(JpaPacienteRepository repository, PacienteMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
-	public PacienteResponse ejecutar(CrearPacienteRequest request) {
-		var entity = mapper.toEntity(request);
-		var saved = repository.save(entity);
-		return mapper.toResponse(saved);
-	}
+    public PacienteResponse ejecutar(CrearPacienteRequest request) {
+        repository.findByDocumento(request.getDocumento().trim())
+            .ifPresent(existing -> { throw new IllegalStateException("Documento ya registrado"); });
+        var entity = mapper.toEntity(request);
+        var saved = repository.save(entity);
+        return mapper.toResponse(saved);
+    }
 }
