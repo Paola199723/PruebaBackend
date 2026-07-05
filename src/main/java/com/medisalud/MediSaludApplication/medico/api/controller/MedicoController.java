@@ -52,35 +52,27 @@ public class MedicoController {
 
 	@GetMapping
 	public ResponseEntity<List<MedicoResponse>> listar() {
-		return ResponseEntity.ok(listarService.ejecutar());
+		List<MedicoResponse> lista = listarService.ejecutar();
+		if (lista == null || lista.isEmpty()) {
+			throw new ResourceNotFoundException("no hay medicos disponibles");
+		}
+		return ResponseEntity.ok(lista);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<MedicoResponse> obtener(@PathVariable UUID id) {
-		try {
-			return ResponseEntity.ok(buscarService.ejecutar(id));
-		} catch (ResourceNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		}
+		return ResponseEntity.ok(buscarService.ejecutar(id));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<MedicoResponse> actualizar(@PathVariable UUID id, @Valid @RequestBody ActualizarMedicoRequest request) {
-		try {
-			return ResponseEntity.ok(actualizarService.ejecutar(id, request));
-		} catch (ResourceNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		}
+		return ResponseEntity.ok(actualizarService.ejecutar(id, request));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable UUID id) {
-		try {
-			eliminarService.ejecutar(id);
-			return ResponseEntity.noContent().build();
-		} catch (ResourceNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		}
+		eliminarService.ejecutar(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
