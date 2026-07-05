@@ -26,11 +26,3 @@ chmod +x mvnw
 ./mvnw clean package
 ```
 
-// Ruta del pryecto
-```bash
-target/nombre-del-proyecto-0.0.1-SNAPSHOT.jar
-```
-ejecutar jar
-```bash
-java -jar target/nombre-del-proyecto-0.0.1-SNAPSHOT.jar
-```
